@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<!-- 
+  - This file is included by the struts.xml file as an example
+  - of how to break up the configuration file into multiple files.
+-->
+<struts>
+    <package name="example" namespace="/example" extends="struts-default">
+
+        <default-action-ref name="HelloWorld" />
+
+        <action name="HelloWorld" class="org.ketchupfactory.example.HelloWorld">
+            <result>/WEB-INF/example/HelloWorld.jsp</result>
+        </action>
+
+        <action name="Login_*" method="{1}" class="org.ketchupfactory.example.Login">
+            <result name="input">/WEB-INF/example/Login.jsp</result>
+            <result type="redirectAction">Menu</result>
+        </action>
+
+        <action name="FileUpload" class="org.ketchupfactory.example.FileUpload" method="showForm">
+            <result name="input">/WEB-INF/example/FileUpload.jsp</result>
+        </action>
+
+        <action name="doUpload" class="org.ketchupfactory.example.FileUpload" method="execute">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">application/pdf,application/msword,text/plain</param>
+                <param name="maximumSize">10485760</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <result name="success">/WEB-INF/example/Result.jsp</result>
+        </action>
+
+        <action name="*" class="org.ketchupfactory.example.ExampleSupport">
+            <result>/WEB-INF/example/{1}.jsp</result>
+        </action>
+
+        <!-- Add additional "example" package actions here. -->
+
+    </package>
+</struts>
