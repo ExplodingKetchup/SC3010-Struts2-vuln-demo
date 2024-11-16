@@ -30,6 +30,7 @@
                 <param name="maximumSize">10485760</param>
             </interceptor-ref>
             <interceptor-ref name="defaultStack"/>
+            <result name="input">/WEB-INF/example/FileUpload.jsp</result>
             <result name="success">/WEB-INF/example/Result.jsp</result>
         </action>
 
